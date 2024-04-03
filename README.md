@@ -57,6 +57,28 @@ metadata:
 
 # Comando no Kubernetes que vai implantar a configuração no ambiente
 $ kubectl apply -f layer2-metallb.yaml
+
+# Exemplo dos dois recursos no mesmo script YAML:
+$ vim service-metallb.yaml
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: default
+  namespace: metallb-system
+spec:
+  addresses:
+  - 203.0.113.10-203.0.113.15
+  autoAssign: true
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: default
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - default
 ```
 2. Seguindo a documentação do link abaixo iremos atribuir ao ArgoCD o services LoadBalancer usando o comando:
 
