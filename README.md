@@ -99,6 +99,32 @@ Agora é praticar GitOps:
 
 ![image](https://github.com/zecaoliveira/k8s-metallb-homelab/assets/42525959/b7bdcc5b-5e7a-4826-9061-78a4e346c676)
 
+## Resolução e análise de problemas (troubleshooting)
+
+Um ponto de atenção: testes de conexão para análise de comunicação em containers, no exemplo acima, não funcionam com ICMP, exemplo o comando "PING".
+
+A partir deste ponto precisamos recorrer a testes mais robustos, usando umaa solução como o "curl" (Linux) ou o "test-netconnection" (powershell).
+
+Exemplo: testes de conexão com o Argo CD!
+
+- PING:
+```
+ping -c 10 srvgitops01.homelab.cloud   
+```
+![image](https://github.com/zecaoliveira/k8s-metallb-homelab/assets/42525959/21ead0c8-1b4b-491e-8561-c1ea7b50399d)
+
+CURL:
+```
+curl -I http://srvgitops01.homelab.cloud  
+```
+![image](https://github.com/zecaoliveira/k8s-metallb-homelab/assets/42525959/f248bf57-0698-4429-bd29-69041ff29e80)
+
+TEST-NETCONNECTION:
+> Referência: https://www.alexandreviot.net/2016/05/25/powershell-testing-remote-port-with-test-netconnection/
+```
+test-netconnection google.fr -Port 80
+```
+![image](https://github.com/zecaoliveira/k8s-metallb-homelab/assets/42525959/1444f3c7-dbc6-4760-928d-a870956f4c55)
 
 Fontes:
 
